@@ -8,18 +8,17 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
 <script>
-    // โค้ดยามเฝ้าประตู: เช็คว่ามีบัตรผ่านจากหน้า Login ที่ยังไม่หมดอายุหรือไม่
-    window.addEventListener('DOMContentLoaded', () => {
+    // สคริปต์ทำงานทันที (ไม่ต้องรอโหลด HTML)
+    (function() {
         const currentUser = JSON.parse(localStorage.getItem('active_user'));
         const now = new Date().getTime();
 
-        // ถ้าไม่มีข้อมูลล็อคอิน หรือ เวลาหมดอายุแล้ว ให้เตะกลับไปหน้า Login
+        // ตรวจสอบ: ถ้าไม่มีข้อมูล หรือ เวลาในบัตรผ่านหมดอายุแล้ว
         if (!currentUser || now > currentUser.expireAt) {
-            alert('❌ กรุณาเข้าสู่ระบบก่อนใช้งาน');
-            // ใส่ลิงก์หน้า Login ของคุณตรงนี้ เพื่อให้มันเด้งกลับไป
-            window.location.href = 'https://hy-c9.github.io/Smart-Ai-Login/'; 
+            // เด้งไปหน้า Login ทันทีแบบไม่บันทึก History (กด Back กลับมาไม่ได้)
+            window.location.replace('https://hy-c9.github.io/Smart-Ai-Login/');
         }
-    });
+    })();
 </script>
 
     <style>
